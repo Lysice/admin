@@ -1,8 +1,8 @@
 {
-	"name": "summerblue/administrator",
+	"name": "lysice/admin",
 	"description": "A database interface package for Laravel, modified!",
-	"homepage": "https://github.com/summerblue/administrator",
-	"keywords": ["administrator", "admin", "database", "laravel-administrator", "laravel", "cms"],
+	"homepage": "https://github.com/lysice/admin",
+	"keywords": ["admin", "database", "laravel-administrator", "laravel", "cms", "upload"],
 	"license": "MIT",
 	"authors": [
 		{
@@ -11,7 +11,7 @@
 		}
 	],
 	"support": {
-		"issues": "https://github.com/summerblue/administrator/issues"
+		"issues": "https://github.com/lysice/admin/issues"
 	},
 	"require": {
 		"php": ">=7.0.0",
