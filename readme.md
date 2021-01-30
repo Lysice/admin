@@ -1,6 +1,6 @@
-
 ## Intro
 
+summerblue/administrator 后台管理插件图片上传暂时不支持oss或者其他上传方式 魔改了一版 允许你按照自己的方式上传图片并返回相应的图片链接.
 * 中文讨论请前往：https://phphub.org/topics/2301
 * 中文教程见这里：https://phphub.org/topics/2407
 
@@ -26,7 +26,7 @@ Forked from [FrozenNode/Laravel-Administrator](https://github.com/FrozenNode/Lar
 ### 1. composer require
 
 ```
-composer require "summerblue/administrator:^1.1"
+composer require "lysice/admin:^1.2.2"
 ```
 
 ### 2. add provider
