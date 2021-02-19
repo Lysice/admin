@@ -117,7 +117,20 @@ class DataTable
         //get things going by grouping the set
         $table   = $model->getTable();
         $keyName = $model->getKeyName();
-        $query   = $model->groupBy($table.'.'.$keyName);
+
+        $fieldArr = array_column($filters, 'field_name');
+        $filters = array_column($filters, null, 'field_name');
+        if (in_array('deleted_at', $fieldArr)) {
+            $filter = $filters['deleted_at'];
+            if ($filter['value'] == 'true') {
+                $query = $model->onlyTrashed()->groupBy($table.'.'.$keyName);
+            } else {
+                $query = $model->withoutTrashed()->groupBy($table.'.'.$keyName);
+            }
+            unset($filters['deleted_at']);
+        } else {
+            $query = $model->groupBy($table.'.'.$keyName);
+        }
 
         //get the Illuminate\Database\Query\Builder instance and set up the count query
         $dbQuery    = $query->getQuery();
