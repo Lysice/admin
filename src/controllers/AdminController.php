@@ -185,6 +185,31 @@ class AdminController extends Controller
             return response()->json($errorResponse);
         }
 
+        // softDelete 设置了callback则回调callback 否则默认更新deleted_at字段
+        $itemConfig = app('itemconfig');
+        $soft = $itemConfig->getOption('softDelete');
+        if (!empty($soft) && $soft['enabled']) {
+            if (isset($soft['callback']) && is_callable($soft['callback'])) {
+                if ($soft['callback']($model)) {
+                    return response()->json(array(
+                        'success' => true,
+                    ));
+                } else {
+                    return response()->json($errorResponse);
+                }
+            } else {
+                if ($model->update([
+                    'deleted_at' => date("Y-m-d H:i:s"),
+                    'updated_at' => date("Y-m-d H:i:s"),
+                ])) {
+                    return response()->json(array(
+                        'success' => true,
+                    ));
+                } else {
+                    return response()->json($errorResponse);
+                }
+            }
+        }
         //delete the model
         // 如果删除成功，或者数据库里面再也找不到了，就算成功
         if ($model->delete() || !$baseModel::find($id)) {
