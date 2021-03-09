@@ -187,7 +187,7 @@ class AdminController extends Controller
 
         // softDelete 设置了callback则回调callback 否则默认更新deleted_at字段
         $itemConfig = app('itemconfig');
-        $soft = $itemConfig->getOption('softDelete');
+        $soft = $itemConfig->getOption('softDelete',  ['enabled' => false]);
         if (!empty($soft) && $soft['enabled']) {
             if (isset($soft['callback']) && is_callable($soft['callback'])) {
                 if ($soft['callback']($model)) {
